@@ -107,7 +107,7 @@ class RedisTransport(BaseTransport):
 
         try:
             pipeline.execute()
-        except redis.exceptions.RedisError, exception:
+        except redis.exceptions.RedisError as exception:
             self._logger.warn('Cannot push lines to redis server: ' + server['url'])
             raise TransportException(exception)
 

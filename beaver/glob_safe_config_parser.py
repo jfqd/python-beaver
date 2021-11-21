@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-import ConfigParser
+import configparser
 import re
 
 """
@@ -7,7 +7,7 @@ Allows use of square brackets in .ini section names, which are used in some glob
 Based off of python 2.6 ConfigParser.RawConfigParser source code with a few modifications.
 http://hg.python.org/cpython/file/8c4d42c0dc8e/Lib/configparser.py
 """
-class GlobSafeConfigParser(ConfigParser.RawConfigParser):
+class GlobSafeConfigParser(configparser.RawConfigParser):
 
     OPTCRE = re.compile(
         r'(?P<option>[^:=\s][^:=]*)'

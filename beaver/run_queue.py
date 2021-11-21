@@ -1,12 +1,12 @@
 # -*- coding: utf-8 -*-
-import Queue
+import queue
 import signal
 import sys
 import time
 
 from beaver.transports import create_transport
 from beaver.transports.exception import TransportException
-from unicode_dammit import unicode_dammit
+from beaver.unicode_dammit import unicode_dammit
 
 
 def run_queue(queue, beaver_config, logger=None):
@@ -43,7 +43,7 @@ def run_queue(queue, beaver_config, logger=None):
                 if command == "callback":
                     last_update_time = int(time.time())
                     logger.debug('Last update time now {0}'.format(last_update_time))
-            except Queue.Empty:
+            except:
                 if not queue.empty():
                     logger.error('Recieved timeout from main consumer queue - stopping queue')
                     break

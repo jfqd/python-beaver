@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from Queue import Queue
+from queue import queue
 import pika
 import ssl
 from threading import Thread

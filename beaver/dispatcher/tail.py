@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 import multiprocessing
-import Queue
+import queue
 import signal
 import os
 import time
@@ -35,7 +35,7 @@ def run(args=None):
 
     def cleanup(signalnum, frame):
         if signalnum is not None:
-            sig_name = tuple((v) for v, k in signal.__dict__.iteritems() if k == signalnum)[0]
+            sig_name = tuple((v) for v, k in signal.__dict__.items() if k == signalnum)[0]
             logger.info("{0} detected".format(sig_name))
             logger.info("Shutting down. Please wait...")
         else:
@@ -43,7 +43,7 @@ def run(args=None):
 
         try:
             queue_put_nowait(("exit", ()))
-        except Queue.Full:
+        except queue.Full:
             pass
 
         if manager_proc is not None:
@@ -51,6 +51,8 @@ def run(args=None):
                 manager_proc.terminate()
                 manager_proc.join()
             except RuntimeError:
+                pass
+            except AttributeError:
                 pass
 
         if ssh_tunnel is not None:

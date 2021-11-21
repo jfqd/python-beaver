@@ -110,7 +110,7 @@ class TailManager(BaseLog):
         for absname in files:
             try:
                 st = os.stat(absname)
-            except EnvironmentError, err:
+            except EnvironmentError as err:
                 if err.errno != errno.ENOENT:
                     raise
             else:

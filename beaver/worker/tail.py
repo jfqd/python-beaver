@@ -88,7 +88,7 @@ class Tail(BaseLog):
                     _file = io.open(self._filename, 'r', encoding=self._encoding, errors='replace')
                 else:
                     _file = io.open(self._filename, 'r', errors='replace')
-        except IOError, e:
+        except IOError as e:
             self._log_warning(str(e))
             _file = None
             self.close()
@@ -203,7 +203,7 @@ class Tail(BaseLog):
 
         try:
             st = os.stat(self._filename)
-        except EnvironmentError, err:
+        except EnvironmentError as err:
             if err.errno == errno.ENOENT:
                 self._log_info('file removed')
                 self.close()
@@ -236,7 +236,7 @@ class Tail(BaseLog):
         while True:
             try:
                 data = self._file.read(4096)
-            except IOError, e:
+            except IOError as e:
                 if e.errno == errno.ESTALE:
                     self.active = False
                     return False
@@ -476,7 +476,7 @@ class Tail(BaseLog):
             self.active = True
             try:
                 st = os.stat(self._filename)
-            except EnvironmentError, err:
+            except EnvironmentError as err:
                 if err.errno == errno.ENOENT:
                     self._log_info('file removed')
                     self.close()
@@ -507,7 +507,7 @@ class Tail(BaseLog):
                     return self.tail_read(f, window, position=position)
 
                 return False
-            except IOError, err:
+            except IOError as err:
                 if err.errno == errno.ENOENT:
                     return []
                 raise

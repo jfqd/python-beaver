@@ -241,7 +241,7 @@ class BeaverConfig():
             'ssh_remote_port',
         ]
 
-        has = len(filter(lambda x: self.get(x) is not None, required))
+        has = len(list(filter(lambda x: self.get(x) is not None, required)))
         if has > 0 and has != len(required):
             self._logger.warning('Missing {0} of {1} required config variables for ssh'.format(len(required) - has, len(required)))
 
@@ -464,7 +464,7 @@ class BeaverConfig():
             for k in require_bool:
                 config[k] = bool(int(config[k]))
 
-            config['delimiter'] = config['delimiter'].decode('string-escape')
+            config['delimiter'] = config['delimiter']
 
             if config['multiline_regex_after']:
                 config['multiline_regex_after'] = re.compile(config['multiline_regex_after'])

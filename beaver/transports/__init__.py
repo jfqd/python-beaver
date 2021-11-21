@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-
+import sys
 
 def create_transport(beaver_config, logger):
     """Creates and returns a transport object"""
@@ -14,8 +14,9 @@ def create_transport(beaver_config, logger):
             module_path, class_name = transport_str.rsplit('.', 1)
         except ValueError:
             raise Exception('Invalid transport {0}'.format(beaver_config.get('transport')))
-
-    _module = __import__(module_path, globals(), locals(), class_name, -1)
+    
+    level = -1 if sys.version_info < (3, 3) else 0
+    _module = __import__(module_path, globals(), locals(), class_name, level)
     transport_class = getattr(_module, class_name)
     transport = transport_class(beaver_config=beaver_config, logger=logger)
 
